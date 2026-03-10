@@ -10,27 +10,27 @@ namespace CyberSecurityAwarenessBot.Core
     public class Chatbot
     {
         public void Start()  
-        {
-            // 1️⃣ Play audio greeting
+        { 
+            // 1️ Play audio greeting
             string audioPath = "assets\\greeting.wav"; // relative path to WAV file
             AudioPlayer player = new AudioPlayer(audioPath);
             player.PlayGreeting();
 
-            // 2️⃣ Display ASCII logo with colors
+            // 2️ Display logo with colors
             DisplayLogo();
 
-            // 3️⃣ Welcome the user (colored)
+            // 3️ Welcome the user (colored)
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("Welcome to the Cybersecurity Awareness Bot!");
             Console.ResetColor();
             Console.WriteLine();
 
-            // 4️⃣ Ask for user name
+            // 4️ Ask for user name
             Console.Write("Please enter your name: ");
             string userName = Console.ReadLine();
             Console.WriteLine();
 
-            // 5️⃣ Introduction and instructions (colored)
+            // 5️ Introduction and instructions (colored)
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"Hello {userName}! I'm here to help you stay safe online.");
             Console.WriteLine("You can ask me about passwords, phishing, or safe browsing.");
@@ -38,7 +38,7 @@ namespace CyberSecurityAwarenessBot.Core
             Console.ResetColor();
             Console.WriteLine();
 
-            // 6️⃣ Chat loop with colored bot responses
+            // 6️ Chat loop with colored bot responses
             while (true)
             { 
                 Console.ForegroundColor = ConsoleColor.Yellow;
@@ -64,7 +64,7 @@ namespace CyberSecurityAwarenessBot.Core
 
         private void DisplayLogo()
         {
-            // Colored ASCII logo
+            // Colored logo
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("====================================");
             Console.WriteLine("   CYBERSECURITY AWARENESS BOT");
