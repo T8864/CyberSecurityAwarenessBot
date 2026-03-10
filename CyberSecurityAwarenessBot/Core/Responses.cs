@@ -26,4 +26,4 @@ namespace CyberSecurityAwarenessBot.Core
                 return "Bot: I didn’t quite understand that. Could you rephrase?";
         }
     }
-}
+} 

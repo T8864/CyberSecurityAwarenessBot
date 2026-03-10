@@ -28,5 +28,5 @@ namespace CyberSecurityAwarenessBot.Core
                 Console.WriteLine("Bot: Unable to play audio greeting.");
             }
         }
-    }
+    } 
 }

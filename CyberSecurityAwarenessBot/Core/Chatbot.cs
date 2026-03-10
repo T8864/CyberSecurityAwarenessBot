@@ -9,7 +9,7 @@ namespace CyberSecurityAwarenessBot.Core
 {
     public class Chatbot
     {
-        public void Start()
+        public void Start() 
         {
             // 1️⃣ Play audio greeting
             string audioPath = "assets\\greeting.wav"; // relative path to WAV file
@@ -40,7 +40,7 @@ namespace CyberSecurityAwarenessBot.Core
 
             // 6️⃣ Chat loop with colored bot responses
             while (true)
-            {
+            { 
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write("You: ");
                 Console.ResetColor();
