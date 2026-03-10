@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <Content Include="assets\greeting.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 

@@ -10,9 +10,9 @@ namespace CyberSecurityAwarenessBot.Core
     public class Chatbot
     {
         public void Start()  
-        { 
+        {
             // 1️ Play audio greeting
-            string audioPath = "assets\\greeting.wav"; // relative path to WAV file
+            string audioPath = "assets\\greeting.wav";
             AudioPlayer player = new AudioPlayer(audioPath);
             player.PlayGreeting();
 

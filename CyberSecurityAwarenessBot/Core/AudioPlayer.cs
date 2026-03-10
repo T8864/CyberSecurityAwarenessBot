@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using System;
 using System.Media;
+using System.IO; 
 
 namespace CyberSecurityAwarenessBot.Core
 {
@@ -20,13 +18,24 @@ namespace CyberSecurityAwarenessBot.Core
         {
             try
             {
-                SoundPlayer player = new SoundPlayer(filePath);
-                player.PlaySync(); // Simple synchronous playback
+                // Check if the file exists first
+                if (!File.Exists(filePath))
+                {
+                    Console.WriteLine($"Bot: Audio file not found at {filePath}");
+                    return;
+                }
+
+                using (SoundPlayer player = new SoundPlayer(filePath))
+                {
+                    player.Load();      // Preload the WAV file
+                    player.PlaySync();  // Play synchronously
+                }
             }
-            catch
+            catch (Exception ex)
             {
                 Console.WriteLine("Bot: Unable to play audio greeting.");
+                Console.WriteLine($"Error: {ex.Message}");
             }
-        } 
-    }  
+        }
+    }
 }
