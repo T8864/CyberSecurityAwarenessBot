@@ -8,7 +8,7 @@ namespace CyberSecurityAwarenessBot.Core
 {
     public static class Responses
     {
-        public static string GetResponse(string input)
+        public static string GetResponse(string input) 
         {
             input = input.ToLower().Trim();
 
