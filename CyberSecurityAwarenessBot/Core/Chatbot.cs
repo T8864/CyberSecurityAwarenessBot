@@ -1,37 +1,34 @@
 ﻿using System;
-using CyberSecurityAwarenessBot.Core;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 
 namespace CyberSecurityAwarenessBot.Core
 {
     public class Chatbot
     {
-        public void Start()  
+        public void Start()
         {
-            // 1️ Play audio greeting
+            // 1. Play audio greeting
             string audioPath = "assets\\greeting.wav";
             AudioPlayer player = new AudioPlayer(audioPath);
             player.PlayGreeting();
 
-            // 2️ Display logo with colors
-            DisplayLogo();
+            // 2. Display logo from DisplayHelper
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine(DisplayHelper.GetLogo());
+            Console.ResetColor();
+            Console.WriteLine();
 
-            // 3️ Welcome the user (colored)
+            // 3. Welcome the user
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("Welcome to the Cybersecurity Awareness Bot!");
             Console.ResetColor();
             Console.WriteLine();
 
-            // 4️ Ask for user name
+            // 4. Ask for user name
             Console.Write("Please enter your name: ");
             string userName = Console.ReadLine();
             Console.WriteLine();
 
-            // 5️ Introduction and instructions (colored)
+            // 5. Introduction and instructions
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"Hello {userName}! I'm here to help you stay safe online.");
             Console.WriteLine("You can ask me about passwords, phishing, or safe browsing.");
@@ -39,9 +36,9 @@ namespace CyberSecurityAwarenessBot.Core
             Console.ResetColor();
             Console.WriteLine();
 
-            // 6️ Chat loop with colored bot responses
+            // 6. Chat loop
             while (true)
-            { 
+            {
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write("You: ");
                 Console.ResetColor();
@@ -55,23 +52,12 @@ namespace CyberSecurityAwarenessBot.Core
                     break;
                 }
 
-                // Bot response in green
+                // Bot response
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine(Responses.GetResponse(userInput));
                 Console.ResetColor();
                 Console.WriteLine();
             }
-        }
-
-        private void DisplayLogo()
-        {
-            // Colored logo
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("====================================");
-            Console.WriteLine("   CYBERSECURITY AWARENESS BOT");
-            Console.WriteLine("====================================");
-            Console.ResetColor();
-            Console.WriteLine();
         }
     }
 }
