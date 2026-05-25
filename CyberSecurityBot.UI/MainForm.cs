@@ -20,6 +20,7 @@ namespace CyberSecurityBot.UI
         private Panel pnlInput;
 
         private string userName = "";
+        private MemoryManager memory = new MemoryManager();
 
         public MainForm()
         {
@@ -161,6 +162,10 @@ namespace CyberSecurityBot.UI
             }
 
             userName = txtName.Text.Trim();
+
+            // Remember the user's name
+            memory.Remember("name", userName);
+
             txtInput.Enabled = true;
             btnSend.Enabled = true;
             btnStart.Enabled = false;
@@ -188,9 +193,36 @@ namespace CyberSecurityBot.UI
                 return;
 
             AppendMessage($"You: {userInput}", ColorTranslator.FromHtml("#28A745"));
-            string response = Responses.GetResponse(userInput);
-            AppendMessage(response, ColorTranslator.FromHtml("#1B3A6B"));
 
+            // Remember favourite topic if mentioned
+            if (userInput.ToLower().Contains("interested in") || userInput.ToLower().Contains("i like"))
+            {
+                string[] topics = { "password", "phishing", "scam", "privacy", "malware" };
+                foreach (string topic in topics)
+                {
+                    if (userInput.ToLower().Contains(topic))
+                    {
+                        memory.Remember("favouriteTopic", topic);
+                        AppendMessage($"Bot: Great! I will remember that you are interested in {topic}. It is a crucial part of staying safe online.", ColorTranslator.FromHtml("#1B3A6B"));
+                        txtInput.Clear();
+                        return;
+                    }
+                }
+            }
+
+            // Recall favourite topic in response
+            string response = Responses.GetResponse(userInput);
+
+            if (memory.Has("favouriteTopic"))
+            {
+                string topic = memory.Recall("favouriteTopic");
+                if (!userInput.ToLower().Contains(topic))
+                {
+                    response += $"\n\nBot: As someone interested in {topic}, remember to always stay alert online!";
+                }
+            }
+
+            AppendMessage(response, ColorTranslator.FromHtml("#1B3A6B"));
             txtInput.Clear();
         }
 
