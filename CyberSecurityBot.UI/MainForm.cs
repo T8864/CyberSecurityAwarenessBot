@@ -21,6 +21,7 @@ namespace CyberSecurityBot.UI
 
         private string userName = "";
         private MemoryManager memory = new MemoryManager();
+        private SentimentDetector sentimentDetector = new SentimentDetector();
 
         public MainForm()
         {
@@ -162,8 +163,6 @@ namespace CyberSecurityBot.UI
             }
 
             userName = txtName.Text.Trim();
-
-            // Remember the user's name
             memory.Remember("name", userName);
 
             txtInput.Enabled = true;
@@ -193,6 +192,17 @@ namespace CyberSecurityBot.UI
                 return;
 
             AppendMessage($"You: {userInput}", ColorTranslator.FromHtml("#28A745"));
+
+            // Check sentiment first
+            string sentiment = sentimentDetector.DetectSentiment(userInput);
+            string sentimentResponse = sentimentDetector.GetSentimentResponse(sentiment, userInput);
+
+            if (sentimentResponse != null)
+            {
+                AppendMessage(sentimentResponse, ColorTranslator.FromHtml("#1B3A6B"));
+                txtInput.Clear();
+                return;
+            }
 
             // Remember favourite topic if mentioned
             if (userInput.ToLower().Contains("interested in") || userInput.ToLower().Contains("i like"))
