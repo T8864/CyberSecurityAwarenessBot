@@ -49,6 +49,14 @@ namespace CyberSecurityAwarenessBot.Core
             "Bot: Regularly scan your device for malware especially after visiting new websites."
         };
 
+        private static List<string> browsingTips = new List<string>
+        {
+            "Bot: Always check links before clicking. Look for HTTPS and verified sources.",
+            "Bot: Avoid clicking on pop up ads or unexpected download prompts.",
+            "Bot: Hover over links before clicking to preview where they actually lead.",
+            "Bot: Stick to well known, reputable websites when entering personal or payment information."
+        };
+
         // Random number generator
         private static Random random = new Random();
 
@@ -93,7 +101,7 @@ namespace CyberSecurityAwarenessBot.Core
             else if (input.Contains("link") || input.Contains("safe browsing"))
             {
                 lastTopic = "browsing";
-                return "Bot: Always check links before clicking. Look for HTTPS and verified sources.";
+                return browsingTips[random.Next(browsingTips.Count)];
             }
             else if (input.Contains("how are you"))
             {
@@ -126,9 +134,31 @@ namespace CyberSecurityAwarenessBot.Core
                 case "malware":
                     return malwareTips[random.Next(malwareTips.Count)];
                 case "browsing":
-                    return "Bot: Always use HTTPS websites and avoid clicking on pop up ads or unknown links.";
+                    return browsingTips[random.Next(browsingTips.Count)];
                 default:
                     return "Bot: Could you tell me which topic you want more information on? I can help with passwords, phishing, scams, privacy or malware.";
+            }
+        }
+
+        // Returns a random tip for a given topic - used by SentimentDetector for empathetic responses
+        public static string GetRandomTip(string topic)
+        {
+            switch (topic.ToLower().Trim())
+            {
+                case "password":
+                    return passwordTips[random.Next(passwordTips.Count)];
+                case "phishing":
+                    return phishingTips[random.Next(phishingTips.Count)];
+                case "scam":
+                    return scamTips[random.Next(scamTips.Count)];
+                case "privacy":
+                    return privacyTips[random.Next(privacyTips.Count)];
+                case "malware":
+                    return malwareTips[random.Next(malwareTips.Count)];
+                case "browsing":
+                    return browsingTips[random.Next(browsingTips.Count)];
+                default:
+                    return "Bot: Always think before you click and never share personal information online.";
             }
         }
     }

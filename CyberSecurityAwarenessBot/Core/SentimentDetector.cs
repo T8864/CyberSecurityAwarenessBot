@@ -53,21 +53,25 @@ namespace CyberSecurityAwarenessBot.Core
             }
         }
 
-        // Automatically share a relevant tip based on input
+        // Automatically share a relevant tip based on input, pulled from Responses' tip lists
         private string GetAutoTip(string input)
         {
+            input = input.ToLower();
+
             if (input.Contains("scam"))
-                return "Here is a tip: Never send money or personal details to someone you only met online.";
+                return Responses.GetRandomTip("scam");
             else if (input.Contains("password"))
-                return "Here is a tip: Always use strong unique passwords and never share them with anyone.";
+                return Responses.GetRandomTip("password");
             else if (input.Contains("phishing"))
-                return "Here is a tip: Never click links in suspicious emails. Always verify the sender first.";
+                return Responses.GetRandomTip("phishing");
             else if (input.Contains("privacy"))
-                return "Here is a tip: Review your social media privacy settings regularly.";
+                return Responses.GetRandomTip("privacy");
             else if (input.Contains("malware"))
-                return "Here is a tip: Always keep your antivirus software up to date.";
+                return Responses.GetRandomTip("malware");
+            else if (input.Contains("link") || input.Contains("browsing"))
+                return Responses.GetRandomTip("browsing");
             else
-                return "Here is a tip: Always think before you click and never share personal information online.";
+                return Responses.GetRandomTip("");
         }
     }
 }
